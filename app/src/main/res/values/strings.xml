@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">Google Cloud Messaging</string>
+    <!--Application name-->
+    <string name="app_name">Homemade Food Selling Application</string>
+
+    <string name="khana">KHANA</string>
+    <string name="app_tagline">A Homemade Food\n Selling App</string>
+    <string name="login_btn_fb_txt">Facebook</string>
+    <string name="login_btn_gmail_txt">Gmail</string>
+    <string name="login">Login</string>
+
+    <!--facebook login app id-->
     <string name="facebook_app_id">235694486926458</string>
     <string name="fb_login_protocol_scheme">fb235694486926458</string>
+
 </resources>

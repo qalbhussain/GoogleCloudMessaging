@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#26a47e</color>
-    <color name="colorPrimaryDark">#26a47e</color>
-    <color name="colorAccent">#175844</color>
+    <color name="colorPrimary">#fba919</color>
+    <color name="colorPrimaryDark">#db9822</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGrey">#f3f3f3</color>
+
+    <color name="colorPrimaryTransparent">#c6fba919</color>
+    <color name="btnFbBg">#1e71b8</color>
+    <color name="btnGmailBg">#cc2229</color>
+    <color name="colorWhite">#fff</color>
+
 </resources>

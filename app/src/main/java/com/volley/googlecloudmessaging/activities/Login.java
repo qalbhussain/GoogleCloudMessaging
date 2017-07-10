@@ -47,13 +47,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.OnConnectionFailedListener {
     private static String FACEBOOK_TAG = "Facebook";
 
+    //firebase variables
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     FirebaseUser user;
 
     //views variables
-    EditText m_et_Email, m_et_Pass;
-    Button m_btn_login, Signin_Gmail;
+   // EditText m_et_Email, m_et_Pass;
+    //Button m_btn_login,
+    Button Signin_Gmail;
     LinearLayout linearLayout;
 
     //progressIndicator
@@ -70,23 +72,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.screen_login);
         //initialize firebase authentication instance
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         //pass reference to views
-        m_et_Email = (EditText) findViewById(R.id.email);
-        m_et_Pass = (EditText) findViewById(R.id.password);
-        m_btn_login = (Button) findViewById(R.id.login);
+     //   m_et_Email = (EditText) findViewById(R.id.email);
+     //   m_et_Pass = (EditText) findViewById(R.id.password);
+      //  m_btn_login = (Button) findViewById(R.id.login);
         Signin_Gmail = (Button) findViewById(R.id.signin_gmail);
         linearLayout = (LinearLayout) findViewById(R.id.ll);
         Signin_Facebook = (LoginButton) findViewById(R.id.login_button);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         //set click listener to button
-        m_btn_login.setOnClickListener(this);
+    //    m_btn_login.setOnClickListener(this);
         Signin_Gmail.setOnClickListener(this);
 
         //Configure Google signin
@@ -171,10 +173,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
     }
 
     //switch to signup
-    public void GoToSignup(View view) {
-        finish();
-        startActivity(new Intent(getApplicationContext(), Signup.class));
-    }
+//    public void GoToSignup(View view) {
+//        finish();
+//        startActivity(new Intent(getApplicationContext(), Signup.class));
+//    }
 
 
     @Override
@@ -186,15 +188,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
     //what happens when user click a button
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.login) {
-            loginUserWithCredentials();
-        }
+//        if (v.getId() == R.id.login) {
+//            loginUserWithCredentials();
+//        }
         if (v.getId() == R.id.signin_gmail) {
             signIn();
         }
     }
 
-    //log in user to firebase using credentials (email, pass)
+   /* //log in user to firebase using credentials (email, pass)
     private void loginUserWithCredentials() {
         String sEmail = m_et_Email.getText().toString();
         String sPass = m_et_Pass.getText().toString();
@@ -244,7 +246,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
         }
         return true;
     }
-
+*/
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 //connection failed
