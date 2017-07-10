@@ -1,7 +1,5 @@
 package com.volley.googlecloudmessaging.activities;
 
-//signin to firebase using email and password
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -50,8 +48,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
     FirebaseUser user;
 
     //views variables
-   // EditText m_et_Email, m_et_Pass;
-    //Button m_btn_login,
     Button Signin_Gmail;
     LinearLayout linearLayout;
 
@@ -76,16 +72,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
 
 
         //pass reference to views
-     //   m_et_Email = (EditText) findViewById(R.id.email);
-     //   m_et_Pass = (EditText) findViewById(R.id.password);
-      //  m_btn_login = (Button) findViewById(R.id.login);
+
         Signin_Gmail = (Button) findViewById(R.id.signin_gmail);
         linearLayout = (LinearLayout) findViewById(R.id.ll);
         Signin_Facebook = (LoginButton) findViewById(R.id.login_button);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         //set click listener to button
-    //    m_btn_login.setOnClickListener(this);
         Signin_Gmail.setOnClickListener(this);
 
         //Configure Google signin
@@ -144,13 +137,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "Auth Successful", Toast.LENGTH_SHORT).show();
                             user = firebaseAuth.getCurrentUser();
-                            FirebaseDB.saveUserToFirebaseDBWithImage(databaseReference,
-                                    user.getEmail(),
-                                    user.getDisplayName(),
-                                    user.getUid(),
-                                    user.getPhotoUrl().toString());
-                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
-                            finish();
+                            if (user != null){
+                                FirebaseDB.saveUserToFirebaseDBWithImage(databaseReference,
+                                        user.getEmail(),
+                                        user.getDisplayName(),
+                                        user.getUid(),
+                                        user.getPhotoUrl().toString());
+                                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+                                finish();
+                            }
+
                         } else {
                             linearLayout.setVisibility(GONE);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -169,13 +165,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    //switch to signup
-//    public void GoToSignup(View view) {
-//        finish();
-//        startActivity(new Intent(getApplicationContext(), Signup.class));
-//    }
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -185,65 +174,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener,
     //what happens when user click a button
     @Override
     public void onClick(View v) {
-//        if (v.getId() == R.id.login) {
-//            loginUserWithCredentials();
-//        }
         if (v.getId() == R.id.signin_gmail) {
             signIn();
         }
     }
 
-   /* //log in user to firebase using credentials (email, pass)
-    private void loginUserWithCredentials() {
-        String sEmail = m_et_Email.getText().toString();
-        String sPass = m_et_Pass.getText().toString();
-
-        if (validateCredentials(sEmail, sPass)) {
-            //progressBar.setVisibility(View.VISIBLE);
-            linearLayout.setVisibility(View.VISIBLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            firebaseAuth.signInWithEmailAndPassword(sEmail, sPass)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                //progressBar.setVisibility(View.GONE);
-                                //user login successfull
-                                startActivity(new Intent(getApplicationContext(), UserProfile.class));
-                                finish();
-                            } else {
-                                //progressBar.setVisibility(View.GONE);
-                                linearLayout.setVisibility(GONE);
-                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                //user login failed
-                                Toast.makeText(Login.this, "login failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
-
-    }
-
-    //validate user credentials
-    private boolean validateCredentials(String sEmail, String sPass) {
-        //return false if email field is empty
-        if (TextUtils.isEmpty(sEmail)) {
-            m_et_Email.setError("enter email");
-            return false;
-        }
-        //return false if email is entered in wrong format
-        if (sEmail.contains(" ")) {
-            m_et_Email.setError("Please enter correct format e.g xxxx@gmail.com");
-            return false;
-        }
-        //return false if password field is empty
-        if (TextUtils.isEmpty(sPass)) {
-            m_et_Pass.setError("enter password");
-            return false;
-        }
-        return true;
-    }
-*/
+    //on Connection Failed
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 //connection failed
